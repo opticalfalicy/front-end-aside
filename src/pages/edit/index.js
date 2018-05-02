@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 
+import axios from 'axios';
+
 import { Link } from 'react-router-dom';
-import { notes } from '../notes';
+// import { notes } from '../notes';
 
 import '../pagestyles/card.css';
 import '../pagestyles/page.css';
@@ -10,9 +12,9 @@ class EditNote extends Component{
     constructor(props){
         super();
         this.state = {
-            id: props.edit.id,
-            title: props.edit.title,
-            text: props.edit.text
+            _id: '',
+            title: '',
+            text: ''
         };
     };
 
@@ -22,18 +24,43 @@ class EditNote extends Component{
         });
     };
 
+    // handleSubmit = (event) => {
+        // notes.splice(notes, 1, this.state);
+        // this.setState({
+        //     id: this.state.id,
+        //     title: event.target.value,
+        //     text: event.target.value
+        // });
+
+
+    // };
+
     handleSubmit = (event) => {
-        notes.splice(notes, 1, this.state);
-        this.setState({
-            id: this.state.id,
-            title: event.target.value,
-            text: event.target.value
+        event.preventDefault();
+        // let id = this.state.id;
+
+        const note = {
+            _id,
+            title: this.state.title,
+            content: this.state.content
+        }
+
+        axios
+        .put(`https://pensive-jones-2b4f45.netlify.com/edit/${this.state._id}`, { note })
+        .then(res => {
+            console.log(res);
+            console.log(res.data);
         });
-    };
+    }
 
     handleDelete = () => {
-        notes.splice(notes.id, 1);
-        console.log('del');
+        // notes.splice(notes.id, 1);
+        // console.log('del');
+        axios.delete(`https://pensive-jones-2b4f45.netlify.com/edit/${this.state._id}`)
+        .then( res => {
+            console.log(res);
+            console.log(res.data);
+        })
     };
 
     render(){
