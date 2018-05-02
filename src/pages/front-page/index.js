@@ -20,7 +20,7 @@ class Front extends Component{
 
     componentDidMount(){
         axios
-        .get('https://pensive-jones-2b4f45.netlify.com/')
+        .get('https://swedishgood-note.herokuapp.com/notes')
         .then(response => {
             this.setState(() => {notes: response.data});
         })
