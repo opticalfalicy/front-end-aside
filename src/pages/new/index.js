@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import { Link } from 'react-router-dom';
-import { notes } from '../notes';
+// import { notes } from '../notes';
 
 import '../pagestyles/card.css';
 
@@ -9,9 +9,10 @@ class NewNote extends Component{
     constructor(props){
         super();
         this.state = {
-            id: notes.length,
+            newNote: [],
+            _id,
             title: '',
-            text: ''
+            content: ''
         };
     };
 
@@ -23,14 +24,29 @@ class NewNote extends Component{
 
     handleSubmit = (event) => {
         event.preventDefault();
-        let id = this.state.id;
-        notes.push(this.state);
-            this.setState({
-            id: ++id,
-            title: event.target.value,
-            text: event.target.value
+        // let id = this.state.id;
+
+        const newNote = {
+            _id,
+            title: this.state.title,
+            content: this.state.content
+        }
+
+        axios
+        .post('https://pensive-jones-2b4f45.netlify.com/new', { newNote })
+        .then(res => {
+            console.log(res);
+            console.log(res.data);
         });
-    };
+    }
+
+        // notes.push(this.state);
+        //     this.setState({
+        //     id: ++id,
+        //     title: event.target.value,
+        //     text: event.target.value
+    
+
 
     render(){
         return(
@@ -39,7 +55,7 @@ class NewNote extends Component{
             <form className='card-form'>
                 <input name='title' className='form-input form-input-title' type='text' placeholder='-Note Title Here-' value={this.state.title} onChange={(event) => this.handleChange(event)} />
                 <br></br>
-                <input name='text' className='form-input form-input-text' type='text' placeholder='-Note Here-' value={this.state.text} onChange={(event) => this.handleChange(event)} />
+                <input name='content' className='form-input form-input-text' type='text' placeholder='-Note Here-' value={this.state.content} onChange={(event) => this.handleChange(event)} />
                 <br></br>
                 <button className='form-button' onClick={(event) => this.handleSubmit(event)}><Link to='/'>Submit</Link></button>
             </form>

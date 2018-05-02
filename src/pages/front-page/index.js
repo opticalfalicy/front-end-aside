@@ -2,12 +2,29 @@ import React, { Component } from 'react'
 
 import { Link } from 'react-router-dom'
 
-import { notes } from '../notes';
+// import { notes } from '../notes';
 
 import '../pagestyles/page.css'
 import '../pagestyles/card.css';
 
 class Front extends Component{
+
+    constructor(props){
+        super(props);
+        this.state = {
+            notes: [],
+            title: '',
+            content: ''
+        }
+    }
+
+    componentDidMount(){
+        axios
+        .get('https://pensive-jones-2b4f45.netlify.com/')
+        .then(response => {
+            this.setState(() => {notes: response.data});
+        })
+    }
 
     render(){
     return(
