@@ -2,7 +2,9 @@ import React, { Component } from 'react'
 
 import { Link } from 'react-router-dom'
 
-// import { notes } from '../notes';
+import { notes } from '../notes';
+
+import axios from 'axios';
 
 import '../pagestyles/page.css'
 import '../pagestyles/card.css';

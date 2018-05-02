@@ -40,7 +40,7 @@ class EditNote extends Component{
         // let id = this.state.id;
 
         const note = {
-            _id,
+            _id: this.state._id,
             title: this.state.title,
             content: this.state.content
         }

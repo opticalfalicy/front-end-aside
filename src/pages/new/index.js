@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 
 import { Link } from 'react-router-dom';
-// import { notes } from '../notes';
+import { notes } from '../notes';
 
 import '../pagestyles/card.css';
 
@@ -12,7 +12,7 @@ class NewNote extends Component{
         super();
         this.state = {
             newNote: [],
-            _id,
+            _id: '',
             title: '',
             content: ''
         };
@@ -29,7 +29,7 @@ class NewNote extends Component{
         // let id = this.state.id;
 
         const newNote = {
-            _id,
+            _id: this.state._id,
             title: this.state.title,
             content: this.state.content
         }
